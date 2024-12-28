@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toko Digital</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* General Body Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header Section */
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .header img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+
+    .header .info {
+      flex: 1;
+    }
+
+    .header .info h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: #333;
+    }
+
+    .header .info p {
+      margin: 5px 0;
+      color: #777;
+    }
+
+    /* Search Bar */
+    .search {
+      margin: 20px 0;
+      display: flex;
+    }
+
+    .search input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    /* Product Grid */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-card img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 10px;
+    }
+
+    .product-card h3 {
+      margin: 0;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    .product-card p {
+      margin: 5px 0;
+      color: #777;
+    }
+
+    .product-card button {
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .product-card button:hover {
+      background-color: #218838;
+    }
+
+    /* Navigation Menu */
+    .nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #fff;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .nav a .icon {
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+
+    .nav a:hover {
+      color: #007bff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <img src="https://pomf2.lain.la/f/qwkfbz9r.jpg" alt="Store Logo">
+      <div class="info">
+        <h1>NemesisX STORE</h1>
+        <p>NemesisX STORE</p>-
+      </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search">
+      <input id="search-bar" type="text" placeholder="Cari Produk di NemesisX-STORE" oninput="filterProducts()">
+    </div>
+
+    <!-- Product Grid -->
+    <div class="products" id="product-grid">
+      <div class="product-card">
+        <img src="https://pomf2.lain.la/f/qwkfbz9r.jpg" alt="VPS Product">
+        <h3>NOKOS INDONESIA [NO GARANSI]</h3>
+        <p>Rp6.000</p>
+        <button>Tambah</button>
+      </div>
+      <div class="product-card">
+        <img src="https://pomf2.lain.la/f/qwkfbz9r.jpg" alt="VPS Product">
+        <h3>NOKOS INDONESIA [GARANSI 1×]</h3>
+        <p>Rp8.000</p>
+        <button>Tambah</button>
+      </div>
+      <div class="product-card">
+        <img src="https://files.catbox.moe/vdj32p.jpg" alt="VPS Product">
+        <h3>Own PT Panel</h3>
+        <p>Rp25.000</p>
+        <button>Tambah</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Menu -->
+  <div class="nav">
+    <a href="#">
+      <i class="icon fas fa-home"></i>
+      <span>Beranda</span>
+    </a>
+    <a href="#">
+      <i class="icon fas fa-search"></i>
+      <span>Cari</span>
+    </a>
+    <a href="#">
+      <i class="icon fas fa-shopping-cart"></i>
+      <span>Keranjang</span>
+    </a>
+    <a href="#">
+      <i class="icon fas fa-user"></i>
+      <span>Akun</span>
+    </a>
+  </div>
+
+  <script>
+    function filterProducts() {
+      const searchInput = document.getElementById('search-bar').value.toLowerCase();
+      const products = document.querySelectorAll('.product-card');
+
+      products.forEach(product => {
+        const productName = product.querySelector('h3').textContent.toLowerCase();
+        if (productName.includes(searchInput)) {
+          product.style.display = 'block';
+        } else {
+          product.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
+
+<!--
